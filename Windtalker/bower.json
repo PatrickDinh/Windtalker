@@ -1,0 +1,13 @@
+{
+  "name": "Windtalker",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "3.0.0",
+    "jquery": "2.1.4",
+    "angular": "1.4.6",
+    "angular-ui-router": "~0.2.15",
+    "toastr": "2.1.2",
+    "angular-local-storage": "~0.2.2",
+    "signalr": "~2.2.0"
+  }
+}

@@ -31,3 +31,6 @@ _ReSharper*/
 Packages/
 .vs
 .vs
+node_modules
+bower_components
+build
