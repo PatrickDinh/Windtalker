@@ -1,6 +1,6 @@
 ﻿<div>
     <h1>Register to be a windtalker</h1>
-    <div class="col-lg-5">
+    <div class="col-lg-5" ng-if="!vm.registered">
         <form class="form-horizontal">
             <div class="form-group">
                 <label class="col-sm-2">Email: </label>
@@ -20,5 +20,8 @@
                 </div>
             </div>
         </form>
+    </div>
+    <div ng-if="vm.registered">
+        <a ui-sref="login">Click here</a>  to login
     </div>
 </div>

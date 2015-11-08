@@ -13,10 +13,8 @@ app.config(["$httpProvider", function ($httpProvider) {
     $httpProvider.interceptors.push(function ($q) {
         return {
             'responseError': function (response) {
-                if (response.status >= 500) {
-                    var error = (response.data && response.data.errorMessage || response.data.errors[0]) || response.statusText || "An error occured";
-                    toastr.error(error);
-                }
+                var error = (response.data && response.data.errorMessage || response.data.errors[0]) || response.statusText || "An error occured";
+                toastr.error(error);
                 return $q.reject(response);
             }
         };
