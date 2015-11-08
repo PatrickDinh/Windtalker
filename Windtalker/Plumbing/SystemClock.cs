@@ -6,9 +6,6 @@ namespace Windtalker.Plumbing
     [SingleInstance]
     public class SystemClock : IClock
     {
-        public DateTimeOffset UtcNow
-        {
-            get { return DateTimeOffset.UtcNow; }
-        }
+        public DateTime UtcNow => DateTime.UtcNow;
     }
 }

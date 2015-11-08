@@ -11,16 +11,19 @@ namespace Windtalker.Features.Register
     public class CreateUser : ICreateUser
     {
         private readonly IPasswordHashingService _passwordHashingService;
+        private readonly IClock _clock;
         private readonly IQueryExecutor _queryExecutor;
         private readonly IRepository<User> _userRepository;
 
         public CreateUser(IRepository<User> userRepository,
                           IQueryExecutor queryExecutor,
-                          IPasswordHashingService passwordHashingService)
+                          IPasswordHashingService passwordHashingService,
+                          IClock clock)
         {
             _userRepository = userRepository;
             _queryExecutor = queryExecutor;
             _passwordHashingService = passwordHashingService;
+            _clock = clock;
         }
 
         public User Create(string email, string plainTextPassword)
@@ -33,7 +36,7 @@ namespace Windtalker.Features.Register
             }
 
             var hashedPassword = _passwordHashingService.SaltAndHash(plainTextPassword);
-            var user = User.Register(email, hashedPassword);
+            var user = User.Register(email, hashedPassword, _clock.UtcNow);
             _userRepository.Add(user);
 
             return user;

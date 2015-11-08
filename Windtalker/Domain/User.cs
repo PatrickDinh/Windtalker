@@ -9,7 +9,7 @@ namespace Windtalker.Domain
         {
         }
 
-        public User(Guid id, string email, string hashedPassword)
+        public User(Guid id, string email, string hashedPassword, DateTime dateRegistered)
         {
             if (string.IsNullOrWhiteSpace(email))
             {
@@ -19,15 +19,16 @@ namespace Windtalker.Domain
             Id = id;
             Email = email;
             HashedPassword = hashedPassword;
+            DateCreated = dateRegistered;
         }
 
         public string Email { get; set; }
 
         public string HashedPassword { get; set; }
 
-        public static User Register(string email, string hashedPassword)
+        public static User Register(string email, string hashedPassword, DateTime dateRegistered)
         {
-            return new User(Guid.NewGuid(), email, hashedPassword);
+            return new User(Guid.NewGuid(), email, hashedPassword, dateRegistered);
         }
     }
 }

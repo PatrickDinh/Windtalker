@@ -4,6 +4,6 @@ namespace Windtalker.Plumbing
 {
     public interface IClock
     {
-        DateTimeOffset UtcNow { get; }
+        DateTime UtcNow { get; }
     }
 }
