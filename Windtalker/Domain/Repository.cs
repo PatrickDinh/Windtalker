@@ -14,7 +14,8 @@ namespace Windtalker.Domain
 
         public IQueryable<T> All()
         {
-            throw new NotImplementedException();
+            var set = _db.Set<T>();
+            return set;
         }
 
         public IQueryable<T> Filter(Func<T, bool> filter)

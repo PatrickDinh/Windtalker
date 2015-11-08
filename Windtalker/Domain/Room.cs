@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Windtalker.Domain
 {
@@ -9,7 +6,6 @@ namespace Windtalker.Domain
     {
         protected Room()
         {
-            
         }
 
         public Room(Guid id, string name, DateTime dateCreated)
