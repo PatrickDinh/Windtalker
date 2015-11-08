@@ -6,6 +6,7 @@ using Nancy.Json;
 using Nancy.Owin;
 using Owin;
 using Windtalker.Domain;
+using Windtalker.Features.ManageRoom;
 using Windtalker.Features.Register;
 using Windtalker.Plumbing;
 using Windtalker.Plumbing.Auth;
@@ -43,10 +44,14 @@ namespace Windtalker.Plumbing
         private void SeedData(IContainer container)
         {
             var createUser = container.Resolve<CreateUser>();
+            var createRoom = container.Resolve<CreateRoom>();
             var unitOfWork = container.Resolve<IUnitOfWork>();
 
             createUser.Create("a@example.com", "123123");
             createUser.Create("b@example.com", "123123");
+
+            createRoom.Create("General");
+            createRoom.Create("Room 2");
 
             unitOfWork.SaveChanges();
         }

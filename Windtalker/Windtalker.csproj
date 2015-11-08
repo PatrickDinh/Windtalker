@@ -206,7 +206,13 @@
     <Compile Include="Domain\IQuery.cs" />
     <Compile Include="Domain\IWindtalkerDbContext.cs" />
     <Compile Include="Domain\Queries\Users\FindUserByEmailQuery.cs" />
+    <Compile Include="Domain\Room.cs" />
     <Compile Include="Features\Login\LoginModule.cs" />
+    <Compile Include="Features\ManageRoom\CreateRoom.cs" />
+    <Compile Include="Features\ManageRoom\GetRooms.cs" />
+    <Compile Include="Features\ManageRoom\ICreateRoom.cs" />
+    <Compile Include="Features\ManageRoom\IGetRooms.cs" />
+    <Compile Include="Features\ManageRoom\ManageRoomModule.cs" />
     <Compile Include="Features\Register\ICreateUser.cs" />
     <Compile Include="Features\Register\RegisterDto.cs" />
     <Compile Include="Features\ManageUser\CurrentUserModule.cs" />

@@ -13,6 +13,7 @@ namespace Windtalker.Domain
         }
 
         public IDbSet<User> Users { get; set; }
+        public IDbSet<Room> Rooms { get; set; }
 
         public IDbSet<TResult> Set<TResult>() where TResult : EntityBase
         {
