@@ -215,6 +215,7 @@
     <Compile Include="Features\ManageRoom\ICreateRoom.cs" />
     <Compile Include="Features\ManageRoom\IGetRooms.cs" />
     <Compile Include="Features\ManageRoom\ManageRoomModule.cs" />
+    <Compile Include="Features\ManageRoom\RoomDto.cs" />
     <Compile Include="Features\Register\ICreateUser.cs" />
     <Compile Include="Features\Register\RegisterDto.cs" />
     <Compile Include="Features\ManageUser\CurrentUserModule.cs" />
