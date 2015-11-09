@@ -20,7 +20,7 @@ namespace Windtalker.Features.Register
                 }
                 catch (EmailAddressAlreadyTakenException)
                 {
-                    return ErrorResponse.FromMessage("Email address already taken", HttpStatusCode.BadRequest);
+                    return ErrorResponse.FromMessage("Email address is already taken", HttpStatusCode.BadRequest);
                 }
             };
         }

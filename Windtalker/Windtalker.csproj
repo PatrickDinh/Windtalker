@@ -202,9 +202,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Exceptions\DomainException.cs" />
+    <Compile Include="Domain\Exceptions\RoomNameIsAlreadyTakenException.cs" />
     <Compile Include="Domain\Exceptions\EmailAddressAlreadyTakenException.cs" />
     <Compile Include="Domain\IQuery.cs" />
     <Compile Include="Domain\IWindtalkerDbContext.cs" />
+    <Compile Include="Domain\Queries\Rooms\FindRoomByNameQuery.cs" />
     <Compile Include="Domain\Queries\Users\FindUserByEmailQuery.cs" />
     <Compile Include="Domain\Room.cs" />
     <Compile Include="Features\Login\LoginModule.cs" />

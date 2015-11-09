@@ -1,6 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Nancy;
+using Nancy.ModelBinding;
+using Windtalker.Domain.Exceptions;
 using Windtalker.Plumbing;
 
 namespace Windtalker.Features.ManageRoom
@@ -19,12 +20,19 @@ namespace Windtalker.Features.ManageRoom
                 });
                 return new JsonObjectResponse(dto);
             };
+            Post["/room"] = _ =>
+            {
+                var dto = this.Bind<RoomDto>();
+                try
+                {
+                    var newRoom = createRoom.Create(dto.Name);
+                    return new JsonObjectResponse(newRoom);
+                }
+                catch (RoomNameIsAlreadyTakenException)
+                {
+                    return ErrorResponse.FromMessage("Room name is already taken", HttpStatusCode.BadRequest);
+                }
+            };
         }
-    }
-
-    public class RoomDto
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
     }
 }
