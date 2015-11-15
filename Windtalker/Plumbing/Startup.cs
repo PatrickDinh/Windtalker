@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Autofac.Integration.SignalR;
+using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Extensions;
@@ -23,12 +25,19 @@ namespace Windtalker.Plumbing
             var builder = new ContainerBuilder();
             builder.RegisterByAttributes(typeof (Startup).Assembly);
             builder.RegisterAssemblyModules(typeof (Startup).Assembly);
+            builder.RegisterHubs(typeof(Startup).Assembly);
             var container = builder.Build();
+
+            // config hubs
+            var config = new HubConfiguration();
+            config.Resolver = new AutofacDependencyResolver(container);
 
             app.UseJwtTokenAuthentication(container.Resolve<IssuerSetting>(),
                                           container.Resolve<AudienceSetting>(),
                                           container.Resolve<ClientSecretSetting>());
-            app.MapSignalR();
+            
+            app.MapSignalR(config);
+
             app.UseNancy(new NancyOptions
             {
                 Bootstrapper = new NancyBootstrapper(container)

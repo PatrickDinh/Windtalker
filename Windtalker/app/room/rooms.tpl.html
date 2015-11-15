@@ -1,0 +1,8 @@
+﻿<div class="list-group">
+    <a class="list-group-item"
+       ng-repeat="room in vm.rooms track by $index"
+       ng-class="room.id === vm.selectedRoomId ? 'active' : ''"
+       ng-click="vm.changeRoom(room.id)">
+        {{room.name}}
+    </a>
+</div>

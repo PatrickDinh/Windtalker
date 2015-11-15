@@ -9,5 +9,7 @@ namespace Windtalker.Domain
 
         [Column(TypeName = "DateTime2")]
         public DateTime DateCreated { get; set; }
+
+        public string CreatedBy { get; set; }
     }
 }

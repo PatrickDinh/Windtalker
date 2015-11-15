@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Nancy;
 using Nancy.ModelBinding;
+using Nancy.Security;
 using Windtalker.Domain.Exceptions;
 using Windtalker.Plumbing;
 
@@ -10,6 +11,8 @@ namespace Windtalker.Features.ManageRoom
     {
         public ManageRoomModule(ICreateRoom createRoom, IGetRooms getRooms)
         {
+            this.RequiresAuthentication();
+
             Get["/rooms"] = _ =>
             {
                 var allRooms = getRooms.GetAllRooms();

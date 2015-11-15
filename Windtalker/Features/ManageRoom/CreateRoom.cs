@@ -11,11 +11,12 @@ namespace Windtalker.Features.ManageRoom
     public class CreateRoom : ICreateRoom
     {
         private readonly IClock _clock;
-        private readonly IRepository<Room> _roomRepository;
         private readonly IQueryExecutor _queryExecute;
+        private readonly IRepository<Room> _roomRepository;
 
-        public CreateRoom(IClock clock, 
-            IRepository<Room> roomRepository, IQueryExecutor queryExecute)
+        public CreateRoom(IClock clock,
+                          IRepository<Room> roomRepository,
+                          IQueryExecutor queryExecute)
         {
             _clock = clock;
             _roomRepository = roomRepository;

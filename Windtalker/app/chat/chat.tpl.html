@@ -1,9 +1,11 @@
 ﻿<div>
-    <h1>Login</h1>
-    <div class="row" ng-repeat="message in vm.messages track by $index">
-        <div class="col-lg-5">{{message}}</div>
+    <div class="col-lg-3">
+        <rooms></rooms>
     </div>
     <div class="col-lg-5">
+        <div class="row" ng-repeat="message in vm.messages track by $index">
+            <div>{{message.username}} : {{message.body}}</div>
+        </div>
         <form class="form-horizontal">
             <div class="form-group">
                 <label class="col-sm-2">Message: </label>

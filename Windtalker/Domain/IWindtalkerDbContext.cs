@@ -6,6 +6,10 @@ namespace Windtalker.Domain
     {
         IDbSet<User> Users { get; set; }
 
+        IDbSet<Room> Rooms { get; set; }
+
+        IDbSet<Message> Messages { get; set; }
+
         IDbSet<TResult> Set<TResult>() where TResult : EntityBase;
     }
 }
