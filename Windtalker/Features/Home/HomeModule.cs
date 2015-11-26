@@ -1,6 +1,6 @@
 ﻿using Nancy;
 
-namespace Windtalker.Modules
+namespace Windtalker.Features.Home
 {
     public class HomeModule : NancyModule
     {

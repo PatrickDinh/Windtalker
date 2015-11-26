@@ -265,7 +265,7 @@
     <Compile Include="Domain\User.cs" />
     <Compile Include="Plumbing\ErrorResponse.cs" />
     <Compile Include="Features\Register\CreateUser.cs" />
-    <Compile Include="Modules\HomeModule.cs" />
+    <Compile Include="Features\Home\HomeModule.cs" />
     <Compile Include="Features\Register\RegisterModule.cs" />
     <Compile Include="Plumbing\IClock.cs" />
     <Compile Include="Plumbing\IQueryExecutor.cs" />
