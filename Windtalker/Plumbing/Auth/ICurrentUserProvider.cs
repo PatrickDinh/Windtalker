@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Security.Claims;
 
 namespace Windtalker.Plumbing.Auth
 {
     public interface ICurrentUserProvider
     {
-        AuthenticatedUser CurrentUser { get; }
+        ClaimsIdentity CurrentUser { get; }
 
-        void SetCurrentUser(AuthenticatedUser user);
+        void SetCurrentUser(ClaimsIdentity user);
     }
 }

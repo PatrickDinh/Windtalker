@@ -124,6 +124,10 @@
       <HintPath>..\packages\Nancy.Bootstrappers.Autofac.1.3.0\lib\net40\Nancy.Bootstrappers.Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Nancy.MSOwinSecurity, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nancy.MSOwinSecurity.1.0.1\lib\net45\Nancy.MSOwinSecurity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Nancy.Owin, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nancy.Owin.1.3.0\lib\net40\Nancy.Owin.dll</HintPath>
       <Private>True</Private>
@@ -238,9 +242,7 @@
     <Compile Include="Features\ManageUser\CurrentUserModule.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Plumbing\ActionFilters\ActionFiltersModule.cs" />
-    <Compile Include="Plumbing\ActionFilters\CurrentUserActionFilter.cs" />
     <Compile Include="Plumbing\ActionFilters\IActionFilter.cs" />
-    <Compile Include="Plumbing\Auth\AuthenticatedUser.cs" />
     <Compile Include="Plumbing\Auth\AuthenticationResult.cs" />
     <Compile Include="Plumbing\Auth\Authenticator.cs" />
     <Compile Include="Plumbing\Auth\AuthToken.cs" />

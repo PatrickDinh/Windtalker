@@ -13,10 +13,13 @@ namespace Windtalker.Plumbing.Auth
     public class JwtTokenAuthenticationHandler : AuthenticationHandler<JwtTokenAuthenticationOptions>
     {
         private readonly ILogger _logger;
+        private readonly ICurrentUserProvider _currentUserProvider;
 
-        public JwtTokenAuthenticationHandler(ILogger logger)
+        public JwtTokenAuthenticationHandler(ILogger logger,
+            ICurrentUserProvider currentUserProvider)
         {
             _logger = logger;
+            _currentUserProvider = currentUserProvider;
         }
 
         protected override async Task<AuthenticationTicket> AuthenticateCoreAsync()
@@ -35,9 +38,13 @@ namespace Windtalker.Plumbing.Auth
                         Options.Audience,
                         secret);
 
-                    return new AuthenticationTicket(claimsIdentityFromToken, new AuthenticationProperties());
+                    _currentUserProvider.SetCurrentUser(claimsIdentityFromToken);
+
+                    var authenticationTicket = new AuthenticationTicket(claimsIdentityFromToken, new AuthenticationProperties());
+
+                    return authenticationTicket;
                 }
-                catch (JWT.SignatureVerificationException ex)
+                catch (SignatureVerificationException ex)
                 {
                     return null;
                 }
@@ -69,7 +76,7 @@ namespace Windtalker.Plumbing.Auth
             {
                 if (!string.Equals(authToken.Audience, audience, StringComparison.Ordinal))
                 {
-                    throw new TokenValidationException(string.Format("Audience mismatch. Expected: '{0}' and got: '{1}'", audience, authToken.Audience));
+                    throw new TokenValidationException($"Audience mismatch. Expected: '{audience}' and got: '{authToken.Audience}'");
                 }
             }
 
@@ -80,7 +87,7 @@ namespace Windtalker.Plumbing.Auth
                 var expiresAt = authToken.IssuedAt.AddYears(1);
                 if (now > expiresAt)
                 {
-                    throw new TokenValidationException(string.Format("Token is expired. Expiration: '{0}'. Current: '{1}'", expiresAt, now));
+                    throw new TokenValidationException($"Token is expired. Expiration: '{expiresAt}'. Current: '{now}'");
                 }
             }
 
@@ -89,8 +96,7 @@ namespace Windtalker.Plumbing.Auth
             {
                 if (!authToken.Issuer.Equals(issuer, StringComparison.Ordinal))
                 {
-                    throw new TokenValidationException(
-                        string.Format("Token issuer mismatch. Expected: '{0}' and got: '{1}'", issuer, authToken.Issuer));
+                    throw new TokenValidationException($"Token issuer mismatch. Expected: '{issuer}' and got: '{authToken.Issuer}'");
                 }
             }
 
@@ -104,7 +110,7 @@ namespace Windtalker.Plumbing.Auth
         {
             token = null;
             string[] authzHeaders;
-            
+
             if (request.Headers.TryGetValue("Authorization", out authzHeaders) && authzHeaders.Count() == 1)
             {
                 // Remove the bearer token scheme prefix and return the rest as ACS token  

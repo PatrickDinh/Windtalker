@@ -2,8 +2,6 @@
 using System.Linq;
 using System.Security.Claims;
 using Autofac;
-using Nancy;
-using Nancy.Security;
 using Windtalker.Domain.Queries.Users;
 
 namespace Windtalker.Plumbing.Auth
@@ -62,13 +60,6 @@ namespace Windtalker.Plumbing.Auth
                 Success = true,
                 AuthToken = token
             };
-        }
-
-        public IUserIdentity GetUserIdentity(NancyContext context)
-        {
-            var token = context.Request.Headers.Authorization;
-            if (string.IsNullOrWhiteSpace(token)) return null;
-            return _authTokenService.GetUserFromToken(token);
         }
     }
 }

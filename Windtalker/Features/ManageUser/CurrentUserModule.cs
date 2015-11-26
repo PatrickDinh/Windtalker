@@ -9,7 +9,7 @@ namespace Windtalker.Features.ManageUser
     {
         public CurrentUserModule(ICurrentUserProvider currentUserProvider)
         {
-            this.RequiresAuthentication();
+            this.RequiresMSOwinAuthentication();
 
             Get["/currentUser"] = _ => new JsonObjectResponse(currentUserProvider.CurrentUser);
         }

@@ -4,6 +4,7 @@ using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using Windtalker.Domain;
 using Windtalker.Features.Messaging;
+using Windtalker.Plumbing.Auth;
 
 namespace Windtalker.Hubs
 {
@@ -12,21 +13,23 @@ namespace Windtalker.Hubs
     {
         private readonly IAddMessage _addMessage;
         private readonly IGetMessagesForRoom _getMessagesForRoom;
+        private readonly ICurrentUserProvider _currentUserProvider;
         private readonly IUnitOfWork _unitOfWork;
 
         public ChatHub(IAddMessage addMessage,
                        IUnitOfWork unitOfWork,
-                       IGetMessagesForRoom getMessagesForRoom)
+                       IGetMessagesForRoom getMessagesForRoom,
+                       ICurrentUserProvider currentUserProvider)
         {
             _addMessage = addMessage;
             _unitOfWork = unitOfWork;
             _getMessagesForRoom = getMessagesForRoom;
+            _currentUserProvider = currentUserProvider;
         }
 
         public void SendMessage(MessageDto message)
         {
-            var username = Context.User.Identity.Name;
-            var newMessage = _addMessage.Add(username, message.RoomId, message.Body);
+            var newMessage = _addMessage.Add(_currentUserProvider.CurrentUser.Name, message.RoomId, message.Body);
 
             _unitOfWork.SaveChanges();
 

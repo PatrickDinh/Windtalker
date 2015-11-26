@@ -11,7 +11,7 @@ namespace Windtalker.Features.ManageRoom
     {
         public ManageRoomModule(ICreateRoom createRoom, IGetRooms getRooms)
         {
-            this.RequiresAuthentication();
+            this.RequiresMSOwinAuthentication();
 
             Get["/rooms"] = _ =>
             {

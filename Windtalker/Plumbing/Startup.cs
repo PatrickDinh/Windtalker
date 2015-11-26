@@ -34,7 +34,8 @@ namespace Windtalker.Plumbing
 
             app.UseJwtTokenAuthentication(container.Resolve<IssuerSetting>(),
                                           container.Resolve<AudienceSetting>(),
-                                          container.Resolve<ClientSecretSetting>());
+                                          container.Resolve<ClientSecretSetting>(),
+                                          container.Resolve<ICurrentUserProvider>());
             
             app.MapSignalR(config);
 

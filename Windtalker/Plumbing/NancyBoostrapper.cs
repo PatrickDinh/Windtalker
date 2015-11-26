@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using Autofac;
 using Nancy;
 using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Autofac;
 using Nancy.Conventions;
-using ThirdDrawer.Extensions.CollectionExtensionMethods;
 using Windtalker.Domain;
-using Windtalker.Plumbing.ActionFilters;
 using Windtalker.Plumbing.Auth;
 
 namespace Windtalker.Plumbing
@@ -23,20 +19,8 @@ namespace Windtalker.Plumbing
             _container = container;
         }
 
-        protected override void ApplicationStartup(ILifetimeScope container, IPipelines pipelines)
-        {
-            base.ApplicationStartup(container, pipelines);
-
-            var authConfiguration = new StatelessAuthenticationConfiguration(container.Resolve<Authenticator>().GetUserIdentity);
-            StatelessAuthentication.Enable(pipelines, authConfiguration);
-        }
-
         protected override void RequestStartup(ILifetimeScope container, IPipelines pipelines, NancyContext context)
         {
-            container.Resolve<IEnumerable<IActionFilter>>()
-                     .Do(f => f.Enrol(pipelines, context))
-                     .Done();
-
             pipelines.AfterRequest.AddItemToStartOfPipeline(c => CommitUnitOfWork(container, context, c));
             base.RequestStartup(container, pipelines, context);
         }
@@ -61,12 +45,7 @@ namespace Windtalker.Plumbing
         {
             base.ConfigureConventions(conventions);
             conventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("bower_components"));
-            conventions.StaticContentsConventions.AddDirectory("build", null , new[]{
-                ".js", ".ts", ".map",
-                ".css",
-                ".html",
-                ".png", ".jpg", ".gif",
-                ".ttf", ".woff", ".woff2", ".eot",".svg" });
+            conventions.StaticContentsConventions.AddDirectory("build", null, ".js", ".ts", ".map", ".css", ".html", ".png", ".jpg", ".gif", ".ttf", ".woff", ".woff2", ".eot", ".svg");
         }
 
         protected override ILifetimeScope GetApplicationContainer()
@@ -74,5 +53,4 @@ namespace Windtalker.Plumbing
             return _container;
         }
     }
-
 }
