@@ -1,6 +1,7 @@
 ﻿(function() {
-    function roomsController($rootScope, roomService) {
+    function roomsController($rootScope, $uibModal, roomService) {
         var self = this;
+        self.$inject = ["$rootScope", "$uibModal", "roomService"];
         self.rooms = [];
 
         function broadcastRoomChange(roomId) {
@@ -19,6 +20,14 @@
                     }
                 });
             });
+
+            $rootScope.$on("room_created", function(e, args) {
+                self.addRoom(args);
+            });
+        }
+
+        self.addRoom = function(room) {
+            self.rooms.push(room);
         }
 
         self.changeRoom = function(roomId) {
@@ -28,6 +37,12 @@
 
             self.selectedRoomId = roomId;
             broadcastRoomChange(roomId);
+        }
+
+        self.showAddRoomModal = function() {
+            $uibModal.open({
+                template: "<add-room></add-room>"
+            });
         }
 
         init();

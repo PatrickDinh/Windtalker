@@ -1,6 +1,7 @@
 ﻿var app = angular.module("windtalker", [
   "ui.router",
-  "LocalStorageModule"
+  "LocalStorageModule",
+  "ui.bootstrap"
 ]);
 
 app.config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {

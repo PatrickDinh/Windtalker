@@ -29,7 +29,12 @@ namespace Windtalker.Features.ManageRoom
                 try
                 {
                     var newRoom = createRoom.Create(dto.Name);
-                    return new JsonObjectResponse(newRoom);
+                    var responseDto = new CreateRoomResponse
+                    {
+                        Id = newRoom.Id,
+                        Name = newRoom.Name
+                    };
+                    return new JsonObjectResponse(responseDto);
                 }
                 catch (RoomNameIsAlreadyTakenException)
                 {

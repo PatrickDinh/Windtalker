@@ -1,0 +1,17 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Add Room</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3">Room Name: </label>
+            <div class="col-sm-9">
+                <input type="text" ng-model="vm.model.name" placeholder="Room Name" class="form-control" />
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="vm.addRoom()">Add</button>
+    <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+</div>

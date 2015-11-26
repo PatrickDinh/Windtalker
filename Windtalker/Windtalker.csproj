@@ -188,6 +188,8 @@
     <Content Include="app\pumbing\chat-hub-service.js" />
     <Content Include="app\register\register.js" />
     <Content Include="app\register\register.tpl.html" />
+    <Content Include="app\room\add-room.js" />
+    <Content Include="app\room\add-room.tpl.html" />
     <Content Include="app\room\room-service.js" />
     <Content Include="app\room\rooms.js" />
     <Content Include="app\room\rooms.tpl.html" />
@@ -228,6 +230,7 @@
     <Compile Include="Domain\Room.cs" />
     <Compile Include="Features\Login\LoginModule.cs" />
     <Compile Include="Features\ManageRoom\CreateRoom.cs" />
+    <Compile Include="Features\ManageRoom\CreateRoomResponse.cs" />
     <Compile Include="Features\ManageRoom\GetRooms.cs" />
     <Compile Include="Features\ManageRoom\ICreateRoom.cs" />
     <Compile Include="Features\ManageRoom\IGetRooms.cs" />

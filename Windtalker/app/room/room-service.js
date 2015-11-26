@@ -7,6 +7,10 @@
                 return $http.get("/rooms");
             }
 
+            roomService.addRoom = function(model) {
+                return $http.post("/room", model);
+            }
+
             return roomService;
         }
     ])
