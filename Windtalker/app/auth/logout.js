@@ -1,13 +1,13 @@
 ﻿(function () {
 
-    var controller = function (authService, $rootScope) {
+    var controller = function (authService, $rootScope, bus, events) {
         var self = this;
         self.$inject = ["authService", "$location"];
         self.isLoggedOut = false;
 
         function active() {
             authService.logOut();
-            $rootScope.$broadcast("user_loggedOut");
+            bus.publish(events.userLoggedOut);
             self.isLoggedOut = true;
         }
 

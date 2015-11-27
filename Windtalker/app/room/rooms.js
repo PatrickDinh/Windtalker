@@ -1,11 +1,11 @@
 ﻿(function() {
-    function roomsController($rootScope, $uibModal, roomService) {
+    function roomsController($rootScope, $uibModal, $scope, roomService, bus, events) {
         var self = this;
-        self.$inject = ["$rootScope", "$uibModal", "roomService"];
+        self.$inject = ["$rootScope", "$uibModal", "$scope", "roomService", "bus", "events"];
         self.rooms = [];
 
         function broadcastRoomChange(roomId) {
-            $rootScope.$broadcast("chat_changeRoom", roomId);
+            bus.publish(events.chatChangeRoom, roomId);
         }
 
         function init() {
@@ -21,9 +21,9 @@
                 });
             });
 
-            $rootScope.$on("room_created", function(e, args) {
+            bus.subscribe(events.roomCreated, function(e, args) {
                 self.addRoom(args);
-            });
+            }, $scope);
         }
 
         self.addRoom = function(room) {

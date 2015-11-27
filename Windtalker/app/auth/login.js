@@ -1,8 +1,8 @@
 ﻿(function() {
 
-    var controller = function(authService, $location, $state, $rootScope) {
+    var controller = function(authService, $location, $state, bus, events) {
         var self = this;
-        self.$inject = ["authService", "$location"];
+        self.$inject = ["authService", "$location", "$state", "bus", events];
         self.model = {};
 
         if (authService.isLoggedIn()) {
@@ -11,7 +11,7 @@
 
         self.submit = function() {
             authService.login(self.model).then(function () {
-                $rootScope.$broadcast("user_loggedIn");
+                bus.publish(events.userLoggedIn);
                 $state.go("chat");
             });
         };

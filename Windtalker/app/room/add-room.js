@@ -1,5 +1,5 @@
 ﻿(function () {
-    function addRoomController($scope, $rootScope, roomService) {
+    function addRoomController($scope, $rootScope, roomService, bus, events) {
         var self = this;
 
         self.$inject = ["$scope", "roomService"];
@@ -8,7 +8,7 @@
         self.addRoom = function() {
             roomService.addRoom(self.model).success(function(response) {
                 toastr.success("The room was created.");
-                $rootScope.$broadcast("room_created", response);
+                bus.publish(events.roomCreated, response);
                 $scope.$parent.$close();
             });
         }

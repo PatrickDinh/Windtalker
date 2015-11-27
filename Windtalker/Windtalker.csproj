@@ -185,7 +185,9 @@
     <Content Include="app\auth\login.tpl.html" />
     <Content Include="app\auth\auth-interceptor-service.js" />
     <Content Include="app\auth\auth-service.js" />
+    <Content Include="app\pumbing\bus.js" />
     <Content Include="app\pumbing\chat-hub-service.js" />
+    <Content Include="app\pumbing\events.js" />
     <Content Include="app\register\register.js" />
     <Content Include="app\register\register.tpl.html" />
     <Content Include="app\room\add-room.js" />

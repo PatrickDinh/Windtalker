@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    var controller = function ($scope, $rootScope, authService) {
+    var controller = function ($scope, $rootScope, authService, bus, events) {
         var self = this;
         self.messages = [];
         self.model = {};
@@ -23,13 +23,13 @@
             }
         }
 
-        $rootScope.$on("chat_changeRoom", function (e, roomId) {
+        bus.subscribe(events.chatChangeRoom, function(e, roomId) {
             self.selectedRoomId = roomId;
 
             if (self.connectionReady) {
                 getMessagesOnInit();
             }
-        });
+        }, $scope);
 
         function getMessagesOnInit()
         {
