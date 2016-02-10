@@ -1,6 +1,8 @@
-﻿using Nancy;
+﻿using Destructurama.Attributed;
+using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses;
+using Serilog;
 using Windtalker.Plumbing;
 using Windtalker.Plumbing.Auth;
 
@@ -13,6 +15,7 @@ namespace Windtalker.Features.Login
             Post["/login"] = _ =>
             {
                 var loginDto = this.Bind<LoginDto>();
+                Log.Information("User attempted login {@Request}", loginDto);
                 var authResult = authenticator.Authenticate(loginDto.Email, loginDto.Password);
                 if (authResult.Success)
                 {
@@ -39,6 +42,7 @@ namespace Windtalker.Features.Login
     public class LoginDto
     {
         public string Email { get; set; }
+        [NotLogged]
         public string Password { get; set; }
     }
 }
